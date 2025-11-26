@@ -1,36 +1,48 @@
 #include <stdio.h>
 
-/*
-    1. [설계]에서 정의한 변수, 배열, (필요하면) 구조체를 여기에 선언하세요.
-    
-    예시 - 배열 사용:
-    char names[100][20];
-    int scores[100];
-    int count = 0;
-    
-    예시 - 구조체 사용 (선택):
-    struct Student {
-        char name[20];
-        int score;
-    };
-    struct Student students[100];
-*/
+#define MAX 50
 
-
-/*
-    2. [알고리즘]에서 설계한 핵심 기능 함수들을 여기에 선언하세요.
-*/
-
+typedef struct {
+    char eng[30];
+    char kor[30];
+} Word;
 
 int main() {
-    
-    printf("--- C언어 미니 프로젝트 시작! ---\n");
+    Word words[MAX];
+    int count = 0;
+    int menu;
 
-    /*
-        3. [알고리즘]에서 설계한 main 함수의 흐름을
-           여기에 C언어로 자유롭게 구현하세요.
-    */
-    
-    
+    while (1) {
+        printf("\n1. 단어 추가\n");
+        printf("2. 단어 목록 보기\n");
+        printf("0. 종료\n");
+        printf("메뉴 선택: ");
+        scanf("%d", &menu);
+
+        if (menu == 0) {
+            printf("프로그램 종료\n");
+            break;
+        }
+        else if (menu == 1) {
+            printf("영어 단어: ");
+            scanf("%s", words[count].eng);
+            printf("한국어 뜻: ");
+            scanf("%s", words[count].kor);
+            count++;
+            printf("단어가 추가되었습니다.\n");
+        }
+        else if (menu == 2) {
+            if (count == 0) printf("저장된 단어가 없습니다.\n");
+            else {
+                printf("\n[단어 목록]\n");
+                for (int i = 0; i < count; i++)
+                    printf("%d) %s - %s\n", i+1, words[i].eng, words[i].kor);
+            }
+        }
+        else {
+            printf("잘못된 입력입니다.\n");
+        }
+    }
+
     return 0;
 }
